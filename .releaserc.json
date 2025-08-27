@@ -27,12 +27,6 @@
     [
       "@semantic-release/github",
       {
-        "assets": [
-          {
-            "path": "dist/**/*",
-            "label": "Distribution Files"
-          }
-        ],
         "successComment": "This issue has been resolved in version ${nextRelease.version} :tada:",
         "failTitle": "The automated release is failing :rotating_light:"
       }
