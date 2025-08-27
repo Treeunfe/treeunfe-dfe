@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/treeunfe/treeunfe-dfe/compare/v0.5.0...v0.6.0) (2025-08-27)
+
+
+### Features
+
+* use rollup to build on prod ([535ffa1](https://github.com/treeunfe/treeunfe-dfe/commit/535ffa1541218328a967d8f52c4073a21062a1d0))
+
 # [0.5.0](https://github.com/treeunfe/treeunfe-dfe/compare/v0.4.9...v0.5.0) (2025-08-27)
 
 
