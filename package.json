@@ -7,7 +7,7 @@
   "publishConfig": {
     "@treeunfe:registry": "https://npm.pkg.github.com"
   },
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "TreeunfeDFe é uma biblioteca Node.js projetada para simplificar a interação com os webservices da SEFAZ, proporcionando uma solução robusta para automação de processos relacionados à Nota Fiscal Eletrônica (NF-e).",
   "type": "module",
   "config": {
