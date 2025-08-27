@@ -1,5 +1,5 @@
 import path from "path";
-import NFeTreeunfe from "./adapters/NFeTreeunfe";
+import TreeunfeDFe from "./adapters/TreeunfeDFe";
 import { NFe } from "./index.js";
 // import { ConsultaNFe, DFePorChaveNFe, DFePorNSU, DFePorUltimoNSU } from '@Types/NFEDistribuicaoDFe.js';
 // import { CienciaDaOperacao, EventoNFe } from '@Types/NFERecepcaoEvento.js';
@@ -11,11 +11,11 @@ const __dirname = path.dirname(__filename);
 
 const callNFEjs = async () => {
   /**
-   * PARA DOCUMENTAÇÃO COMPLETA, ACESSE: https://nfewizard-org.github.io/
+   * PARA DOCUMENTAÇÃO COMPLETA, ACESSE: https://github.com/Treeunfe/treeunfe-dfe
    */
-  const nfeTreeunfe = new NFeTreeunfe();
+  const nfeTreeunfe = new TreeunfeDFe();
 
-  await nfeTreeunfe.NFE_LoadEnvironment({
+  await nfeTreeunfe.DFE_LoadEnvironment({
     config: {
       dfe: {
         baixarXMLDistribuicao: true,

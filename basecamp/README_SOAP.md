@@ -1,4 +1,4 @@
-# NFeTreeunfe-io: Guia Completo de Comunicação SOAP, Autenticação e Assinatura Digital
+# TreeunfeDFe: Guia Completo de Comunicação SOAP, Autenticação e Assinatura Digital
 
 ## 📚 Introdução
 
@@ -34,7 +34,7 @@ src/
 ### 2. Fluxo de Comunicação
 
 ```
-[Seu Código] → [NFeTreeunfe] → [BaseNFe] → [GerarConsulta] → [XmlBuilder] → [SEFAZ]
+[Seu Código] → [TreeunfeDFe] → [BaseNFe] → [GerarConsulta] → [XmlBuilder] → [SEFAZ]
 ```
 
 ## 🔑 Autenticação com Certificado Digital A1
@@ -265,7 +265,7 @@ protected async callWebService(
 
 ## 📋 Configuração dos Serviços SOAP
 
-### 1. URLs dos Webservices (`NFeServicosUrl.json`)
+### 1. URLs dos Webservices (`DFeServicosUrl.json`)
 
 O projeto mantém um arquivo de configuração com todas as URLs dos webservices da SEFAZ para cada UF:
 
@@ -314,12 +314,12 @@ await this.utility.validateSchemaJsBased(xmlConsulta, metodo);
 ### 1. Configuração Inicial
 
 ```typescript
-import NFeTreeunfe from "treeunfe-dfe";
+import TreeunfeDFe from "treeunfe-dfe";
 
 const nfeTreeunfe = new NFETreeunfe();
 
 // Carrega ambiente com certificado
-await nfeTreeunfe.NFE_LoadEnvironment({
+await nfeTreeunfe.DFE_LoadEnvironment({
   config: {
     dfe: {
       pathCertificado: "./certificado.pfx",

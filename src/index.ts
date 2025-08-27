@@ -1,21 +1,21 @@
 /*
- * This file is part of NFeTreeunfe-io.
+ * This file is part of TreeunfeDFe.
  *
- * NFeTreeunfe-io is free software: you can redistribute it and/or modify
+ * TreeunfeDFe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * NFeTreeunfe-io is distributed in the hope that it will be useful,
+ * TreeunfeDFe is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with NFeTreeunfe-io. If not, see <https://www.gnu.org/licenses/>.
+ * along with TreeunfeDFe. If not, see <https://www.gnu.org/licenses/>.
  */
-import NFeTreeunfe from "./adapters/NFeTreeunfe";
+import TreeunfeDFe from "./adapters/TreeunfeDFe";
 
 export * from "./core/types";
 export * from "./core/utils/NFEImposto";
-export { NFeTreeunfe as default };
+export { TreeunfeDFe as default };

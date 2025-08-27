@@ -11,20 +11,20 @@
  * - Modification    :
  **/
 /*
- * This file is part of NFeTreeunfe-io.
+ * This file is part of TreeunfeDFe.
  *
- * NFeTreeunfe-io is free software: you can redistribute it and/or modify
+ * TreeunfeDFe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * NFeTreeunfe-io is distributed in the hope that it will be useful,
+ * TreeunfeDFe is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with NFeTreeunfe-io. If not, see <https://www.gnu.org/licenses/>.
+ * along with TreeunfeDFe. If not, see <https://www.gnu.org/licenses/>.
  */
 
 import { logger } from "@Core/exceptions/logger";
@@ -33,8 +33,8 @@ import { createHash } from "crypto";
 import fs from "fs";
 import libxmljs from "libxmljs2";
 import {
+  DFeServicosUrlType,
   GenericObject,
-  NFeServicosUrlType,
   ProtNFe,
   SaveJSONProps,
   SaveXMLProps,
@@ -46,7 +46,7 @@ import xml2js from "xml2js";
 import xsdAssembler from "xsd-assembler";
 import xsdValidator from "xsd-schema-validator";
 import { getSchema } from "../../adapters/SchemaLoader";
-import NFeServicosUrl from "../config/NFeServicosUrl.json";
+import DFeServicosUrl from "../config/DFeServicosUrl.json";
 import soapMethod from "../config/soapMethod.json";
 import XmlParser from "./XmlParser";
 
@@ -227,7 +227,7 @@ class Utility {
   };
 
   getSoapInfo(uf: string, method: string) {
-    const servicos = NFeServicosUrl as ServicesUrl;
+    const servicos = DFeServicosUrl as ServicesUrl;
     let chaveMethod = "";
     let chaveSoap = "";
 
@@ -267,7 +267,7 @@ class Utility {
       context: "GerarConsulta",
       chaveSoap,
       chaveMethod,
-      NFeServicosUrl: "src/core/config/NFeServicosUrl.json",
+      DFeServicosUrl: "src/core/config/DFeServicosUrl.json",
     });
 
     if (!methodUrl || !soapUrl) {
@@ -286,7 +286,7 @@ class Utility {
    * @returns
    */
   getLatestURLConsultaFix(chave: string): Record<string, string> {
-    const urls = NFeServicosUrl as NFeServicosUrlType;
+    const urls = DFeServicosUrl as DFeServicosUrlType;
     const temp_urls: Record<string, string> = { ...urls[chave] };
     if ("Usar" in temp_urls) {
       const referencedChave = temp_urls["Usar"];
@@ -374,7 +374,7 @@ class Utility {
       versao,
       mod
     );
-    const urls = NFeServicosUrl as NFeServicosUrlType;
+    const urls = DFeServicosUrl as DFeServicosUrlType;
 
     if ("Usar" in urls[chaveMae]) chaveMae = urls[chaveMae].Usar;
 
@@ -394,7 +394,7 @@ class Utility {
       versao,
       "NFCe"
     );
-    const urls = NFeServicosUrl as NFeServicosUrlType;
+    const urls = DFeServicosUrl as DFeServicosUrlType;
     // removendo este codigo funciona
     // if ('Usar' in urls[chaveMae]){
     //     chaveMae = urls[chaveMae].Usar

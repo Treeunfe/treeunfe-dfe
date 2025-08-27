@@ -214,7 +214,7 @@
     "449": "Rejeição: Modalidade de Frete não é por conta do Destinatário",
     "450": "Rejeição: Modelo da NF-e diferente de 55",
     "451": "Rejeição: Processo de Emissão pelo Fisco incompatível com a Série da NF",
-    "452": "Rejeição: Processo de Emissão pelo Fisco incompatível com a Série da NF",
+    "452": "Rejeição: Solicitada resposta assíncrona para Lote com somente 1 (uma) NF-e",
     "453": "Rejeição: Solicitada resposta assíncrona para Lote com somente 1 (uma) NFC-e",
     "454": "Rejeição: Ano de inutilização não pode ser inferior a 2006",
     "455": "Rejeição: Órgão Autor do evento diferente da UF da Chave de Acesso",

@@ -20,8 +20,8 @@ import {
   TreeunfeNFe,
 } from "@Types";
 
-export interface NFeTreeunfeServiceImpl {
-  NFE_LoadEnvironment({ config }: { config: TreeunfeNFe }): Promise<void>;
+export interface NFETreeunfeServiceImpl {
+  DFE_LoadEnvironment({ config }: { config: TreeunfeNFe }): Promise<void>;
   NFE_ConsultaStatusServico(): Promise<any>;
   NFE_ConsultaProtocolo(chave: string): Promise<any>;
   NFE_RecepcaoEvento(evento: EventoNFe): Promise<GenericObject[]>;

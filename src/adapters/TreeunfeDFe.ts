@@ -1,21 +1,5 @@
-/*
- * This file is part of NFeTreeunfe-io.
- *
- * NFeTreeunfe-io is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * NFeTreeunfe-io is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with NFeTreeunfe-io. If not, see <https://www.gnu.org/licenses/>.
- */
-import { NFeTreeunfeImpl, NFeTreeunfeServiceImpl } from "@Interfaces";
-import NFeTreeunfeService from "@Modules/dfe/nfe/services/NFeTreeunfe/NFeTreeunfeService";
+import { NFETreeunfeServiceImpl, TreeunfeDFeImpl } from "@Interfaces";
+import NFETreeunfeService from "@Modules/dfe/nfe/services/NFeTreeunfe/NFeTreeunfeService";
 import {
   Cancelamento,
   CartaDeCorrecao,
@@ -27,7 +11,6 @@ import {
   DFePorUltimoNSU,
   DesconhecimentoDaOperacao,
   EPEC,
-  EmailParams,
   EventoNFe,
   InutilizacaoData,
   NFEGerarDanfeProps,
@@ -36,15 +19,15 @@ import {
   TreeunfeNFe,
 } from "src/core/types";
 
-export default class NFeTreeunfe implements NFeTreeunfeImpl {
-  private nfeTreeunfeService: NFeTreeunfeServiceImpl;
+export default class TreeunfeDFe implements TreeunfeDFeImpl {
+  private nfeTreeunfeService: NFETreeunfeServiceImpl;
 
   constructor() {
-    this.nfeTreeunfeService = new NFeTreeunfeService();
+    this.nfeTreeunfeService = new NFETreeunfeService();
   }
 
-  async NFE_LoadEnvironment({ config }: { config: TreeunfeNFe }) {
-    await this.nfeTreeunfeService.NFE_LoadEnvironment({ config });
+  async DFE_LoadEnvironment({ config }: { config: TreeunfeNFe }) {
+    await this.nfeTreeunfeService.DFE_LoadEnvironment({ config });
   }
 
   /**
@@ -108,11 +91,15 @@ export default class NFeTreeunfe implements NFeTreeunfeImpl {
   }
 
   /**
-   * Autorização
+   * Autorização NF-e
    */
   async NFE_Autorizacao(data: NFe) {
     return await this.nfeTreeunfeService.NFE_Autorizacao(data);
   }
+
+  /**
+   * Autorização NFC-e
+   */
   async NFCE_Autorizacao(data: NFe) {
     return await this.nfeTreeunfeService.NFCE_Autorizacao(data);
   }
@@ -132,13 +119,5 @@ export default class NFeTreeunfe implements NFeTreeunfeImpl {
   }
   async NFCE_GerarDanfe(data: NFEGerarDanfeProps) {
     return await this.nfeTreeunfeService.NFCE_GerarDanfe(data);
-  }
-
-  /**
-   * Método para envio de e-mail
-   * @param {EmailParams} mailParams - Mensagem de texto (aceita html)
-   */
-  NFE_EnviaEmail(mailParams: EmailParams) {
-    return this.nfeTreeunfeService.NFE_EnviaEmail(mailParams);
   }
 }

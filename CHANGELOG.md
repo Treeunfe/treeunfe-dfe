@@ -39,8 +39,8 @@
 
 ### Fixed
 
-- **NFeTreeunfeService**
-  - Retorna propagação de erro aos métodos do NFeTreeunfeService
+- **NFETreeunfeService**
+  - Retorna propagação de erro aos métodos do NFETreeunfeService
 
 ## [0.3.29] - 2025-06-26
 

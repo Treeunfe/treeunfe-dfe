@@ -9,7 +9,6 @@ import {
   DFePorUltimoNSU,
   DesconhecimentoDaOperacao,
   EPEC,
-  EmailParams,
   EventoNFe,
   GenericObject,
   InutilizacaoData,
@@ -21,8 +20,8 @@ import {
   TreeunfeNFe,
 } from "@Types";
 
-export interface NFeTreeunfeImpl {
-  NFE_LoadEnvironment({ config }: { config: TreeunfeNFe }): Promise<void>;
+export interface TreeunfeDFeImpl {
+  DFE_LoadEnvironment({ config }: { config: TreeunfeNFe }): Promise<void>;
   NFE_ConsultaStatusServico(): Promise<any>;
   NFE_ConsultaProtocolo(chave: string): Promise<any>;
   NFE_RecepcaoEvento(evento: EventoNFe): Promise<GenericObject[]>;
@@ -66,5 +65,4 @@ export interface NFeTreeunfeImpl {
     message: string;
     success: boolean;
   }>;
-  NFE_EnviaEmail(mailParams: EmailParams): void;
 }

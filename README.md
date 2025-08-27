@@ -84,18 +84,18 @@ Dessa forma, a treeunfe-dfe será tratada como uma dependência externa, permiti
 Para ambientes CJS (CommonJS) a importação utilizada deverá ser feita da seguinte maneira:
 
 ```typescript
-const NFeTreeunfe = require("treeunfe-dfe").default;
+const TreeunfeDFe = require("treeunfe-dfe").default;
 ```
 
 ## Exemplo de Utilização
 
 ```typescript
-import NFeTreeunfe from "treeunfe-dfe";
+import TreeunfeDFe from "treeunfe-dfe";
 // Instanciar
-const nfeTreeunfe = new NFeTreeunfe();
+const nfeTreeunfe = new TreeunfeDFe();
 
 // Inicializar
-await nfeTreeunfe.NFE_LoadEnvironment({
+await nfeTreeunfe.DFE_LoadEnvironment({
   config: {
     dfe: {
       baixarXMLDistribuicao: true,

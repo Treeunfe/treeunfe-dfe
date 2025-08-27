@@ -16,7 +16,7 @@ src/assets/qrcode.png
 src/core/config/verifica-urls.js
 src/core/config/atualizaUrls.js
 src/core/config/urls_atualizadas.ini
-src/core/config/NFeServicosUrl_backup.json
+src/core/config/DFeServicosUrl_backup.json
 
 tmp
 package-lock.json

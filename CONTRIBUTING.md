@@ -104,7 +104,7 @@ mkdir -p certificados
 # Copie seu certificado .pfx para o diretório
 cp /caminho/para/seu/certificado.pfx ./certificado.pfx
 
-# Informe o caminho para o certificado no método de inicialização da lib (NFE_LoadEnvironment config -> dfe -> pathCertificado)
+# Informe o caminho para o certificado no método de inicialização da lib (DFE_LoadEnvironment config -> dfe -> pathCertificado)
 ```
 
 ---
@@ -199,9 +199,9 @@ O projeto já conta com configuração pronta para debug no VS Code:
 
 ```typescript
 // Edite o arquivo src/debug.ts
-const nfeTreeunfe = new NFeTreeunfe();
+const nfeTreeunfe = new TreeunfeDFe();
 
-await nfeTreeunfe.NFE_LoadEnvironment({
+await nfeTreeunfe.DFE_LoadEnvironment({
   config: {
     dfe: {
       // ... outras configurações
@@ -389,7 +389,7 @@ src/
 
 ```typescript
 // Classes: PascalCase
-class NFeTreeunfeService { }
+class NFETreeunfeService { }
 
 // Métodos públicos: PascalCase com prefixo
 public async NFE_ConsultaStatusServico(): Promise<any> { }
@@ -431,8 +431,8 @@ Use o arquivo `src/debug.ts` para testar:
 
 ```typescript
 // 1. Configure seus dados
-const nfeTreeunfe = new NFeTreeunfe();
-await nfeTreeunfe.NFE_LoadEnvironment({
+const nfeTreeunfe = new TreeunfeDFe();
+await nfeTreeunfe.DFE_LoadEnvironment({
   /* sua config */
 });
 

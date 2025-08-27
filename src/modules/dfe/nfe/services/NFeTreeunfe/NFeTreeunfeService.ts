@@ -1,7 +1,7 @@
 import XmlBuilder from "@Adapters/XmlBuilder";
 import { logger } from "@Core/exceptions/logger";
 import Utility from "@Core/utils/Utility";
-import { NFeTreeunfeServiceImpl } from "@Interfaces";
+import { NFETreeunfeServiceImpl } from "@Interfaces";
 import GerarConsulta from "@Modules/dfe/base/GerarConsulta";
 import SaveFiles from "@Modules/dfe/base/SaveFiles";
 import NFCEGerarDanfe from "@Modules/dfe/danfe/NFCEGerarDanfe/NFCEGerarDanfe";
@@ -60,7 +60,7 @@ import NFEEpecService from "../NFERecepcaoEvento/NFEEpecService";
 import NFEOperacaoNaoRealizadaService from "../NFERecepcaoEvento/NFEOperacaoNaoRealizadaService";
 import NFERecepcaoEventoService from "../NFERecepcaoEvento/NFERecepcaoEventoService";
 
-class NFeTreeunfeService implements NFeTreeunfeServiceImpl {
+class NFETreeunfeService implements NFETreeunfeServiceImpl {
   private config: TreeunfeNFe = {} as TreeunfeNFe;
   private environment: Environment = {} as Environment;
   private utility: Utility = {} as Utility;
@@ -73,14 +73,14 @@ class NFeTreeunfeService implements NFeTreeunfeServiceImpl {
     if (new.target) {
       return new Proxy(this, {
         get(
-          target: NFeTreeunfeService,
+          target: NFETreeunfeService,
           prop: string | symbol,
           receiver: any
         ): any {
           const origMethod: any = target[prop as keyof typeof target];
           if (typeof origMethod === "function") {
             return async function (...args: any[]): Promise<any> {
-              if (prop === "NFE_LoadEnvironment") {
+              if (prop === "DFE_LoadEnvironment") {
                 return origMethod.apply(target, args);
               }
               // Lógica de validação antes de cada método
@@ -95,7 +95,7 @@ class NFeTreeunfeService implements NFeTreeunfeServiceImpl {
     }
   }
 
-  async NFE_LoadEnvironment({ config }: { config: TreeunfeNFe }) {
+  async DFE_LoadEnvironment({ config }: { config: TreeunfeNFe }) {
     try {
       this.config = config;
       // Carrega Ambiente
@@ -119,7 +119,7 @@ class NFeTreeunfeService implements NFeTreeunfeServiceImpl {
       // console.log('Biblioteca Inicializada com Sucesso');
       // console.log('===================================');
     } catch (error) {
-      logger.error(``, error, { context: "NFE_LoadEnvironment" });
+      logger.error(``, error, { context: "DFE_LoadEnvironment" });
       throw new Error(`Erro ao inicializar a lib: ${error}`);
     }
   }
@@ -608,10 +608,10 @@ class NFeTreeunfeService implements NFeTreeunfeServiceImpl {
   private async validateEnvironment(prop: string): Promise<void> {
     if (!this.environment.isLoaded) {
       throw new Error(
-        `Ambiente não carregado. Por favor, carregue o ambiente utilizando o método "NFE_LoadEnvironment({ sua_configuracao })" antes de chamar o método ${prop}.`
+        `Ambiente não carregado. Por favor, carregue o ambiente utilizando o método "DFE_LoadEnvironment({ sua_configuracao })" antes de chamar o método ${prop}.`
       );
     }
   }
 }
 
-export default NFeTreeunfeService;
+export default NFETreeunfeService;
