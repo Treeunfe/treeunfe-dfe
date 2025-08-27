@@ -1,83 +1,83 @@
 /*
- * This file is part of NFeWizard-io.
- * 
- * NFeWizard-io is free software: you can redistribute it and/or modify
+ * This file is part of NFeTreeunfe-io.
+ *
+ * NFeTreeunfe-io is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
- * NFeWizard-io is distributed in the hope that it will be useful,
+ *
+ * NFeTreeunfe-io is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
- * along with NFeWizard-io. If not, see <https://www.gnu.org/licenses/>.
+ * along with NFeTreeunfe-io. If not, see <https://www.gnu.org/licenses/>.
  */
 
 export type EmailConfig = {
+  /**
+   * @param {string} host - Host SMTP do seu provedor de e-mail
+   */
+  host: string;
+  /**
+   * @param {number} port - Porta do servidor SMTP
+   */
+  port: number;
+  /**
+   * @param {boolean} secure - true para SSL, false para outros
+   */
+  secure: boolean;
+  /**
+   * @param auth - Dados para autenticação no servidor SMTP
+   */
+  auth: {
     /**
-     * @param {string} host - Host SMTP do seu provedor de e-mail
+     * @param {string} user - Seu e-mail para autenticação no servidor SMTP
      */
-    host: string;
+    user: string;
     /**
-     * @param {number} port - Porta do servidor SMTP
+     * @param {string} pass -  Sua senha para autenticação no servidor SMTP
      */
-    port: number;
+    pass: string;
+  };
+  /**
+   * @param emailParams -  Dados para enviao do e-mail
+   */
+  emailParams: {
     /**
-     * @param {boolean} secure - true para SSL, false para outros
+     * @param {string} from -  Remetente padrão
      */
-    secure: boolean;
+    from: string;
     /**
-     * @param auth - Dados para autenticação no servidor SMTP
+     * @param {string} to -  Destinatário padrão
      */
-    auth: {
-        /**
-         * @param {string} user - Seu e-mail para autenticação no servidor SMTP
-         */
-        user: string;
-        /**
-         * @param {string} pass -  Sua senha para autenticação no servidor SMTP
-         */
-        pass: string;
-    };
-    /**
-     * @param emailParams -  Dados para enviao do e-mail
-     */
-    emailParams: {
-        /**
-         * @param {string} from -  Remetente padrão
-         */
-        from: string;
-        /**
-         * @param {string} to -  Destinatário padrão
-         */
-        to: string;
-    };
-}
+    to: string;
+  };
+};
 
 interface Attachment {
-    /**
-     * @param {string | false} filename -  Nome do arquivo à anexar (Ex: danfe.pdf)
-     */
-    filename?: string | false;
-    /**
-     * @param {string} path -  Caminho completo para o arquivo (Ex: ./src/assets/danfe.pdf)
-     */
-    path: string;
+  /**
+   * @param {string | false} filename -  Nome do arquivo à anexar (Ex: danfe.pdf)
+   */
+  filename?: string | false;
+  /**
+   * @param {string} path -  Caminho completo para o arquivo (Ex: ./src/assets/danfe.pdf)
+   */
+  path: string;
 }
 
 export type EmailParams = {
-    /**
-     * @param message -  Mensagem de texto (aceita html)
-     */
-    message: string;
-    /**
-     * @param {string} subject -  Assunto do email
-     */
-    subject: string;
-    /**
-     * @param {Attachment[] | undefined} attachments -  Anexos do email
-     */
-    attachments?: Attachment[];
-}
+  /**
+   * @param message -  Mensagem de texto (aceita html)
+   */
+  message: string;
+  /**
+   * @param {string} subject -  Assunto do email
+   */
+  subject: string;
+  /**
+   * @param {Attachment[] | undefined} attachments -  Anexos do email
+   */
+  attachments?: Attachment[];
+};

@@ -1,25 +1,27 @@
 /*
- * This file is part of NFeWizard-io.
- * 
- * NFeWizard-io is free software: you can redistribute it and/or modify
+ * This file is part of NFeTreeunfe-io.
+ *
+ * NFeTreeunfe-io is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
- * NFeWizard-io is distributed in the hope that it will be useful,
+ *
+ * NFeTreeunfe-io is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
- * along with NFeWizard-io. If not, see <https://www.gnu.org/licenses/>.
+ * along with NFeTreeunfe-io. If not, see <https://www.gnu.org/licenses/>.
  */
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
 
-
-const baseDir = path.dirname(fileURLToPath(import.meta.url))
-const dir = process.env.NODE_ENV === 'production' ? '../resources/schemas' : '../resources/schemas/';
+const baseDir = path.dirname(fileURLToPath(import.meta.url));
+const dir =
+  process.env.NODE_ENV === "production"
+    ? "../resources/schemas"
+    : "../resources/schemas/";
 
 /**
  * Efetua a leitura do Schema
@@ -40,14 +42,14 @@ export const getSchema = (metodo: string) => {
     NFEAutorizacao: `${pathSchemas}/enviNFe_v4.00.xsd`,
     NFEInutilizacao: `${pathSchemas}/inutNFe_v4.00.xsd`,
     NFERetAutorizacao: `${pathSchemas}/consReciNFe_v4.00.xsd`,
-  }
+  };
 
   try {
     return {
       basePath: pathSchemas,
-      schemaPath: schema[metodo]
-    }
+      schemaPath: schema[metodo],
+    };
   } catch (error: any) {
     throw new Error(error.message);
   }
-}
+};

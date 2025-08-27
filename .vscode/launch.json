@@ -4,7 +4,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug NFe Wizard",
+            "name": "Debug Treeunfe DFe",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -31,7 +31,8 @@
             ],
             "program": "${workspaceFolder}/src/testes.ts",
             "runtimeArgs": [
-                "--loader", "ts-node/esm"
+                "--loader",
+                "ts-node/esm"
             ],
             "console": "integratedTerminal",
             "env": {

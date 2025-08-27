@@ -6,7 +6,8 @@ Ao abrir issue ou PR, inclua:
 
 ```markdown
 ## Parametrização
-- UF: SP
+
+- UF: PR
 - Certificado: A1
 - Método: NFE_ConsultaStatusServico
 - Status: ✅ Funcionando / ❌ Com erro
@@ -21,57 +22,50 @@ Lembre-se de adicionar os logs **app.jsonl**, **error.jsonl** e **http.jsonl**.
 {"context":"NFE_ConsultaProtocolo","error":{"message":"Rejeição: Consumo Indevido",...}
 ```
 
-<!-- ## 🚨 ATENÇÃO: Esta biblioteca será modularizada! 🚨 -->
-
-<!-- A biblioteca nfewizard-io agora está dividida em módulos menores para facilitar a manutenção e otimizar o tamanho do pacote.
-
-⚠️ A partir da versão 1.0.0 este repositório será responsável apenas pelos serviços de NF-e.  Para os serviços de NFC-e utilize o `@nfewizard-io/nfce`. -->
-
-<!-- ## 📦 Como instalar os novos pacotes?
-
-### Para utilizar serviços relacionados à NFCe instale o modulo:
-```typescript
-npm i @nfewizard-io/nfce
-```
-🚀 Pronto, agora você pode decidir utilizar apenas os serviços que precisa! -->
-
 ## Sobre a Biblioteca
+
 Treeunfe DFe é uma biblioteca Node.js projetada para simplificar a interação com os webservices da SEFAZ, proporcionando uma solução robusta para automação de processos relacionados à Nota Fiscal Eletrônica (NF-e). A biblioteca oferece métodos abrangentes para diversas operações fiscais, incluindo:
 
 - **Autorização (Emissão de NFe e NFCe)**: Submissão de Notas Fiscais Eletrônicas e Notas Fiscais de Consumidor Eletrônica
-para autorização.
+  para autorização.
 - **Distribuição DFe**: Consulta e Download de DF-e (Documentos fiscais eletrônicos), facilitando o acesso a documentos fiscais eletrônicos.
 - **Consulta de Protocolo**: Verificação da situação atual da NF-e na Base de Dados do Portal da Secretaria de Fazenda Estadual.
 - **Inutilização de NFe**: Processo de inutilização de números de NF-e que não serão utilizados, assegurando a conformidade fiscal.
 - **Consulta de Status do Serviço**: Monitoramento do status dos serviços da SEFAZ, garantindo a disponibilidade dos webservices.
 - **Recepção de Eventos**: Tratamento de diversos eventos relacionados à NFe e NFCe, incluindo:
-    - Cancelamento de NFe e NFCe
-    - Carta de Correção
-    - Ciência da Operação
-    - Confirmação da Operação
-    - Desconhecimento da Operação
-    - EPEC (Evento Prévio de Emissão em Contingência)
-    - Operação Não Realizada
+  - Cancelamento de NFe e NFCe
+  - Carta de Correção
+  - Ciência da Operação
+  - Confirmação da Operação
+  - Desconhecimento da Operação
+  - EPEC (Evento Prévio de Emissão em Contingência)
+  - Operação Não Realizada
 - **Geração de DANFE**: Criação do Documento Auxiliar da Nota Fiscal Eletrônica (DANFE), um resumo impresso da NFe.
 
 ## 🚧 ATENÇÃO 🚧
+
 ### Requisitos para instalação
+
 Para utilizar esta biblioteca, é necessário ter o JDK instalado no ambiente.
 
 Caso esteja rodando em um ambiente sem suporte ao JDK (como a Vercel) ou que não permita a adição de layers (diferente do AWS Lambda), é possível configurar a biblioteca como uma external lib e utilizar a seguinte opção ao inicializá-la:
+
 ```typescript
-useForSchemaValidation: 'validateSchemaJsBased'
+useForSchemaValidation: "validateSchemaJsBased";
 ```
+
 ### Exemplo de configuração no Serverless Framework
+
 Se estiver usando o Serverless Framework, você pode marcar a biblioteca como external no arquivo de configuração (.yml), garantindo que ela não seja empacotada junto ao código da aplicação:
+
 ```yml
 build:
   esbuild:
     bundle: true
     minify: true
     sourcemap: true
-    target: 'node20'
-    format: 'cjs'
+    target: "node20"
+    format: "cjs"
     external:
       - better-sqlite3
       - mysql
@@ -82,90 +76,90 @@ build:
       - pg-query-stream
       - nfewizard-io
 ```
+
 Dessa forma, a nfewizard-io será tratada como uma dependência externa, permitindo sua execução sem a necessidade do JDK no ambiente.
 
 ### Exemplo de importação CJS
 
 Para ambientes CJS (CommonJS) a importação utilizada deverá ser feita da seguinte maneira:
-```typescript
-const NFeWizard = require('nfewizard-io').default;
-```
 
+```typescript
+const NFeTreeunfe = require("nfewizard-io").default;
+```
 
 ## Exemplo de Utilização
 
 ```typescript
-import NFeWizard from 'nfewizard-io';
+import NFeTreeunfe from "nfewizard-io";
 // Instanciar
-const nfeWizard = new NFeWizard();
+const nfeTreeunfe = new NFeTreeunfe();
 
 // Inicializar
-await nfeWizard.NFE_LoadEnvironment({
-        config: {
-            dfe: {
-                baixarXMLDistribuicao: true,
-                pathXMLDistribuicao: "tmp/DistribuicaoDFe",
-                armazenarXMLAutorizacao: true,
-                pathXMLAutorizacao: "tmp/Autorizacao",
-                armazenarXMLRetorno: true,
-                pathXMLRetorno: "tmp/RequestLogs",
-                armazenarXMLConsulta: true,
-                pathXMLConsulta: "tmp/RequestLogs",
-                armazenarXMLConsultaComTagSoap: false,
-                armazenarRetornoEmJSON: false,
-                pathRetornoEmJSON: "tmp/DistribuicaoDFe",
+await nfeTreeunfe.NFE_LoadEnvironment({
+  config: {
+    dfe: {
+      baixarXMLDistribuicao: true,
+      pathXMLDistribuicao: "tmp/DistribuicaoDFe",
+      armazenarXMLAutorizacao: true,
+      pathXMLAutorizacao: "tmp/Autorizacao",
+      armazenarXMLRetorno: true,
+      pathXMLRetorno: "tmp/RequestLogs",
+      armazenarXMLConsulta: true,
+      pathXMLConsulta: "tmp/RequestLogs",
+      armazenarXMLConsultaComTagSoap: false,
+      armazenarRetornoEmJSON: false,
+      pathRetornoEmJSON: "tmp/DistribuicaoDFe",
 
-                pathCertificado: "certificado.pfx",
-                senhaCertificado: "1234",
-                UF: "SP",
-                CPFCNPJ: "99999999999999",
-            },
-            nfe: {
-                ambiente: 2,
-                versaoDF: "4.00",
-                idCSC: 1,
-                tokenCSC: '99999999-9999-9999-9999-999999999999'
-            },
-            email: {
-                host: 'mail.provider.com.br',
-                port: 465,
-                secure: true, 
-                auth: {
-                    user: 'nfe.example@email.com.br',
-                    pass: '123456' 
-                },
-                emailParams: {
-                    from: 'Company <noreply.company@email.com>',
-                    to: 'customer.name@email.com.br',
-                }
-            },
-            lib: {
-                connection: {
-                    timeout: 30000,
-                },
-                log: {
-                    exibirLogNoConsole: true,
-                    armazenarLogs: true,
-                    pathLogs: 'tmp/Logs'
-                },
-                useOpenSSL: false,
-                useForSchemaValidation: 'validateSchemaJsBased',
-            }
-        }
-    });
+      pathCertificado: "certificado.pfx",
+      senhaCertificado: "1234",
+      UF: "SP",
+      CPFCNPJ: "99999999999999",
+    },
+    nfe: {
+      ambiente: 2,
+      versaoDF: "4.00",
+      idCSC: 1,
+      tokenCSC: "99999999-9999-9999-9999-999999999999",
+    },
+    email: {
+      host: "mail.provider.com.br",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "nfe.example@email.com.br",
+        pass: "123456",
+      },
+      emailParams: {
+        from: "Company <noreply.company@email.com>",
+        to: "customer.name@email.com.br",
+      },
+    },
+    lib: {
+      connection: {
+        timeout: 30000,
+      },
+      log: {
+        exibirLogNoConsole: true,
+        armazenarLogs: true,
+        pathLogs: "tmp/Logs",
+      },
+      useOpenSSL: false,
+      useForSchemaValidation: "validateSchemaJsBased",
+    },
+  },
+});
 
-    // Exemplo de Utilização
-    const chaveNFe: DFePorChaveNFe = {
-        cUFAutor: 35,
-        CNPJ: '99999999999999',
-        consChNFe: {
-            chNFe: '00000000000000000000000000000000000000000000'
-        },
-    }
+// Exemplo de Utilização
+const chaveNFe: DFePorChaveNFe = {
+  cUFAutor: 35,
+  CNPJ: "99999999999999",
+  consChNFe: {
+    chNFe: "00000000000000000000000000000000000000000000",
+  },
+};
 
-    await nfeWizard.NFE_DistribuicaoDFePorChave(chaveNFe);
+await nfeTreeunfe.NFE_DistribuicaoDFePorChave(chaveNFe);
 ```
-  
 
 ## Última Release (0.3.1)
 
@@ -179,60 +173,54 @@ await nfeWizard.NFE_LoadEnvironment({
 - `UF`: Testado apenas para São Paulo. Por favor, abra uma issue caso encontre problemas com outros estados.
 
 **Para uma boa experiência de Debug no VS Code permitindo fazer o "step into" nos métodos do NfeWizzard, usar o launch.json com sourceMpas true e outFiles conforme segue:**:
+
 ```json
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Debug NFe Wizard",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/src/testes.ts",
-            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/tsx",
-            "runtimeArgs": [],
-            "console": "integratedTerminal",
-            "env": {
-                "NODE_ENV": "development"
-            },
-            "sourceMaps": true,
-            "restart": true,
-            "protocol": "inspector",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Debug com ts-node",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/src/testes.ts",
-            "runtimeArgs": [
-                "--loader", "ts-node/esm"
-            ],
-            "console": "integratedTerminal",
-            "env": {
-                "NODE_ENV": "development",
-                "NODE_OPTIONS": "--loader ts-node/esm"
-            },
-            "sourceMaps": true
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug NFe Treeunfe",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/testes.ts",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/tsx",
+      "runtimeArgs": [],
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "sourceMaps": true,
+      "restart": true,
+      "protocol": "inspector",
+      "outFiles": ["${workspaceFolder}/**/*.js"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug com ts-node",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/testes.ts",
+      "runtimeArgs": ["--loader", "ts-node/esm"],
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_ENV": "development",
+        "NODE_OPTIONS": "--loader ts-node/esm"
+      },
+      "sourceMaps": true
+    }
+  ]
 }
 ```
 
 **Exemplo do tsconfig.json do projeto que importa o Treeunfe DFe:**:
+
 ```json
 {
   "compilerOptions": {
     "target": "es2020",
     "module": "nodenext",
-    "outDir": "dist", 
+    "outDir": "dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

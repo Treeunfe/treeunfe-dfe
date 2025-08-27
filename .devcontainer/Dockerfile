@@ -25,7 +25,7 @@ RUN java -version && \
 USER node
 
 # Criar diretório de trabalho
-WORKDIR /workspaces/nfewizard-io
+WORKDIR /workspaces/treeunfe-dfe
 
 # Expor porta para desenvolvimento
 EXPOSE 3000

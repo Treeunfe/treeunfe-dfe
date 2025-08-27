@@ -37,17 +37,17 @@ Existem várias maneiras de contribuir para o projeto:
 Antes de começar, certifique-se de ter as ferramentas necessárias:
 
 ### Ferramentas Obrigatórias
+
 - **Node.js**: Versão 18 ou superior
 - **npm**: Para gerenciamento de dependências
 - **Git**: Para versionamento de código
 - **VS Code**: IDE recomendada (com suporte nativo ao debug)
 
 ### Ambiente para Testes
+
 - **Certificado Digital**: Acesso a um certificado `.pfx` válido
 - **Dados de Homologação**: CNPJ e credenciais para testes
 - **Conexão com Internet**: Para comunicação com webservices da SEFAZ
-
-
 
 ---
 
@@ -56,6 +56,7 @@ Antes de começar, certifique-se de ter as ferramentas necessárias:
 ### 1. **Fork do Repositório**
 
 #### Para HTTPS:
+
 ```bash
 # 1. Faça fork do repositório no GitHub
 # 2. Clone seu fork localmente
@@ -70,6 +71,7 @@ git remote -v
 ```
 
 Para SSH (se você tem chave SSH configurada):
+
 ```bash
 # 1. Faça fork do repositório no GitHub
 # 2. Clone seu fork localmente
@@ -152,20 +154,24 @@ git push origin feature/nome-da-sua-feature
 
 ```markdown
 ## Descrição
+
 Breve descrição das mudanças implementadas.
 
 ## Tipo de Mudança
+
 - [ ] Bug fix
 - [ ] Nova funcionalidade
 - [ ] Documentação
 
 ## Como Testar
+
 1. Descomente o método necessário no `src/debug.ts`
 2. Configure os dados de teste
 3. Execute o debug com `npm run debug`
 4. Verifique o comportamento esperado
 
 ## Checklist
+
 - [ ] Código segue os padrões do projeto
 - [ ] Testes foram adicionados/atualizados
 - [ ] Documentação foi atualizada
@@ -181,6 +187,7 @@ Breve descrição das mudanças implementadas.
 O projeto já conta com configuração pronta para debug no VS Code:
 
 **Arquivo: `.vscode/launch.json`** (já configurado)
+
 - ✅ Suporte nativo ao TypeScript
 - ✅ Source maps habilitados
 - ✅ Console integrado
@@ -189,41 +196,46 @@ O projeto já conta com configuração pronta para debug no VS Code:
 ### 2. **Como Usar o Debug**
 
 #### **Passo 1: Configurar dados de teste**
+
 ```typescript
 // Edite o arquivo src/debug.ts
-const nfeWizard = new NFeWizard();
+const nfeTreeunfe = new NFeTreeunfe();
 
-await nfeWizard.NFE_LoadEnvironment({
-    config: {
-        dfe: {
-        // ... outras configurações
-            pathCertificado: "certificado.pfx",
-            senhaCertificado: "SUA_SENHA",
-            UF: "SP", // Sua UF
-            CPFCNPJ: "SEU_CNPJ", // Seu CNPJ
-        },
-        // ... outras configurações
-    }
+await nfeTreeunfe.NFE_LoadEnvironment({
+  config: {
+    dfe: {
+      // ... outras configurações
+      pathCertificado: "certificado.pfx",
+      senhaCertificado: "SUA_SENHA",
+      UF: "SP", // Sua UF
+      CPFCNPJ: "SEU_CNPJ", // Seu CNPJ
+    },
+    // ... outras configurações
+  },
 });
 ```
 
 #### **Passo 2: Descomentar o método desejado**
+
 ```typescript
 // Exemplo: para testar consulta de status
-await nfeWizard.NFE_ConsultaStatusServico(); // ← Descomente esta linha
+await nfeTreeunfe.NFE_ConsultaStatusServico(); // ← Descomente esta linha
 ```
 
 #### **Passo 3: Colocar breakpoints**
+
 1. Clique na margem esquerda da linha onde quer parar
 2. Aparecerá um ponto vermelho (breakpoint)
 3. Coloque breakpoints em pontos estratégicos
 
 #### **Passo 4: Iniciar debug**
+
 1. Aperte `F5` ou vá em **Run > Start Debugging**
-2. Selecione **"Debug NFe Wizard"**
+2. Selecione **"Debug NFe Treeunfe"**
 3. O código vai parar nos breakpoints
 
 #### **Passo 5: Navegar no debug**
+
 - **F5**: Continuar
 - **F10**: Próxima linha (step over)
 - **F11**: Entrar na função (step into)
@@ -236,13 +248,13 @@ await nfeWizard.NFE_ConsultaStatusServico(); // ← Descomente esta linha
 async Exec(data?: any): Promise<any> {
     // BREAKPOINT 1: Ver dados de entrada
     xmlConsulta = this.gerarXml(data); // ← Verificar XML gerado
-    
-    // BREAKPOINT 2: Ver resposta da SEFAZ  
+
+    // BREAKPOINT 2: Ver resposta da SEFAZ
     xmlRetorno = await this.callWebService(...); // ← Verificar comunicação
-    
+
     // BREAKPOINT 3: Ver XML de retorno
     responseInJson = json.convertXmlToJson(xmlRetorno.data, this.metodo); // ← Verificar parsing
-    
+
     return responseInJson; // ← Verificar resultado final
 }
 ```
@@ -258,9 +270,9 @@ Durante o debug, use os painéis:
 
 ```javascript
 // Exemplos de comandos no Debug Console
-xmlRetorno.data.length        // Ver tamanho da resposta
-JSON.stringify(responseInJson) // Ver JSON completo
-xmlConsulta.substring(0, 200)  // Ver início do XML
+xmlRetorno.data.length; // Ver tamanho da resposta
+JSON.stringify(responseInJson); // Ver JSON completo
+xmlConsulta.substring(0, 200); // Ver início do XML
 ```
 
 ---
@@ -284,6 +296,7 @@ lib: {
 ### 2. **Tipos de Log**
 
 #### **Console (desenvolvimento)**
+
 ```
 2025-06-27 00:48:22 info: [Logger] Logger inicializado com sucesso {"config":{"console":true}}
 2025-06-27 00:48:22 http: [BaseNFE][NFEConsultaProtocolo] Iniciando comunicação {"url":"https://..."}
@@ -291,22 +304,42 @@ lib: {
 ```
 
 #### **Arquivos JSONL (produção)**
+
 Os logs são salvos em arquivos separados no formato JSONL (JSON Lines):
 
 **`tmp/Logs/app.jsonl`** - Logs gerais
+
 ```jsonl
 {"level":"info","message":"Inicializando ambiente","timestamp":"2025-06-27T00:48:22.720Z","context":"Environment"}
 {"level":"warn","message":"Certificado expira em 30 dias","timestamp":"2025-06-27T00:48:23.120Z","context":"Certificate"}
 ```
 
 **`tmp/Logs/error.jsonl`** - Apenas erros
+
 ```jsonl
-{"level":"error","message":"Erro na conversão XML","timestamp":"2025-06-27T00:48:22.928Z","context":"XmlParser","error":{"message":"Formato inválido","stack":"..."}}
+{
+  "level": "error",
+  "message": "Erro na conversão XML",
+  "timestamp": "2025-06-27T00:48:22.928Z",
+  "context": "XmlParser",
+  "error": {
+    "message": "Formato inválido",
+    "stack": "..."
+  }
+}
 ```
 
 **`tmp/Logs/http.jsonl`** - Requisições HTTP
+
 ```jsonl
-{"level":"http","message":"Requisição iniciada","timestamp":"2025-06-27T00:48:22.771Z","context":"BaseNFE","url":"https://nfe.sefaz.sp.gov.br/ws","duration":"150ms"}
+{
+  "level": "http",
+  "message": "Requisição iniciada",
+  "timestamp": "2025-06-27T00:48:22.771Z",
+  "context": "BaseNFE",
+  "url": "https://nfe.sefaz.sp.gov.br/ws",
+  "duration": "150ms"
+}
 ```
 
 ### 3. **Vantagens dos Logs JSONL**
@@ -356,7 +389,7 @@ src/
 
 ```typescript
 // Classes: PascalCase
-class NFeWizardService { }
+class NFeTreeunfeService { }
 
 // Métodos públicos: PascalCase com prefixo
 public async NFE_ConsultaStatusServico(): Promise<any> { }
@@ -371,20 +404,20 @@ const xmlConsulta: string = '';
 ### 2. **Logging**
 
 ```typescript
-import { logger } from '@Core/exceptions/logger.js';
+import { logger } from "@Core/exceptions/logger.js";
 
 // Use contexto consistente
-logger.info('Iniciando operação', { 
-    context: 'MinhaClasse', 
-    method: 'meuMetodo',
-    parametros: { id: 123 }
+logger.info("Iniciando operação", {
+  context: "MinhaClasse",
+  method: "meuMetodo",
+  parametros: { id: 123 },
 });
 
 // Para HTTP, use nível http
-logger.http('Requisição enviada', {
-    context: 'MinhaClasse',
-    url: webServiceUrl,
-    method: 'POST'
+logger.http("Requisição enviada", {
+  context: "MinhaClasse",
+  url: webServiceUrl,
+  method: "POST",
 });
 ```
 
@@ -398,11 +431,13 @@ Use o arquivo `src/debug.ts` para testar:
 
 ```typescript
 // 1. Configure seus dados
-const nfeWizard = new NFeWizard();
-await nfeWizard.NFE_LoadEnvironment({ /* sua config */ });
+const nfeTreeunfe = new NFeTreeunfe();
+await nfeTreeunfe.NFE_LoadEnvironment({
+  /* sua config */
+});
 
 // 2. Descomente o método que quer testar
-await nfeWizard.NFE_ConsultaStatusServico();
+await nfeTreeunfe.NFE_ConsultaStatusServico();
 
 // 3. Execute com debug para analisar o comportamento
 ```
@@ -413,14 +448,13 @@ Para homologar uma nova UF:
 
 ```typescript
 // Teste todos os métodos principais
-await nfeWizard.NFE_ConsultaStatusServico();    // ✅ Status OK
-await nfeWizard.NFE_ConsultaProtocolo('chave'); // ✅ Consulta OK  
-await nfeWizard.NFE_DistribuicaoDFe(params);   // ✅ Distribuição OK
-await nfeWizard.NFE_Autorizacao(nfe);          // ✅ Autorização OK
+await nfeTreeunfe.NFE_ConsultaStatusServico(); // ✅ Status OK
+await nfeTreeunfe.NFE_ConsultaProtocolo("chave"); // ✅ Consulta OK
+await nfeTreeunfe.NFE_DistribuicaoDFe(params); // ✅ Distribuição OK
+await nfeTreeunfe.NFE_Autorizacao(nfe); // ✅ Autorização OK
 ```
 
 Adicione ao arquivo `STATUS_HOMOLOGACAO.md`:
-
 
 ### 3. **Issues E PRs**
 
@@ -428,6 +462,7 @@ Ao abrir issue ou PR, inclua:
 
 ```markdown
 ## Ambiente Testado
+
 - UF: SP
 - Certificado: A1
 - Método: NFE_ConsultaStatusServico
@@ -444,9 +479,11 @@ Lembre-se de adicionar os logs **app.jsonl**, **error.jsonl** e **http.jsonl**.
 ```
 
 ## Evidências
+
 - [ ] Screenshots dos logs
 - [ ] XML de request/response (sem dados sensíveis)
 - [ ] Configuração utilizada
+
 ```
 
 ---
@@ -476,3 +513,4 @@ Todos os contribuidores são reconhecidos no projeto! Suas contribuições ajuda
 ---
 
 *Para dúvidas específicas sobre desenvolvimento, consulte os logs ou abra uma issue no GitHub.*
+```
