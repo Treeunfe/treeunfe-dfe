@@ -1,3 +1,15 @@
+# [0.5.0](https://github.com/treeunfe/treeunfe-dfe/compare/v0.4.9...v0.5.0) (2025-08-27)
+
+
+### Bug Fixes
+
+* corrige configuração do semantic-release e adiciona workflow alternativo ([5f625c3](https://github.com/treeunfe/treeunfe-dfe/commit/5f625c31e3f8d6a32f60d5b563302cb6cc2627a6))
+
+
+### Features
+
+* change way todo release ([b836320](https://github.com/treeunfe/treeunfe-dfe/commit/b836320f47c50ca073734b9124fb3a83691d3d09))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
