@@ -1,10 +1,24 @@
-## [0.4.9](https://github.com/treeunfe/treeunfe-dfe/compare/v0.4.8...v0.4.9) (2025-08-27)
-
 # Changelog
 
-## [0.4.7] - 2025-08-14
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### Fix
+## [0.4.9] - 2024-12-19
+
+### Fixed
+
+- **Rollup Config**
+  - Externaliza libxmljs2.
+
+## [0.4.8] - 2024-12-12
+
+### Fixed
+
+- **Build System**
+  - Correções no processo de build e distribuição.
+
+## [0.4.7] - 2024-12-05
+
+### Fixed
 
 - **Rollup Config**
   - Externaliza libxmljs2.
