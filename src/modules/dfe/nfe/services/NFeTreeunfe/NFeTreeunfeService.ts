@@ -1,4 +1,3 @@
-import MailController from "@Adapters/MailAdapter";
 import XmlBuilder from "@Adapters/XmlBuilder";
 import { logger } from "@Core/exceptions/logger";
 import Utility from "@Core/utils/Utility";
@@ -22,7 +21,6 @@ import {
   DFePorUltimoNSU,
   DesconhecimentoDaOperacao,
   EPEC,
-  EmailParams,
   EventoNFe,
   InutilizacaoData,
   NFEGerarDanfeProps,
@@ -601,26 +599,6 @@ class NFeTreeunfeService implements NFeTreeunfeServiceImpl {
     } catch (error: any) {
       logger.error(``, error, { context: "NFCE_GerarDanfe" });
       throw new Error(`NFCE_GerarDanfe: ${error.message}`);
-    }
-  }
-
-  /**
-   * Método para envio de e-mail
-   * @param {EmailParams} mailParams - Mensagem de texto (aceita html)
-   */
-  NFE_EnviaEmail(mailParams: EmailParams) {
-    try {
-      const mailController = new MailController(this.environment);
-      const response = mailController.sendEmail(mailParams);
-
-      console.log("Retorno NFE_EnviaEmail");
-      console.log("E-mail enviado com sucesso.");
-      console.log("===================================");
-
-      return response;
-    } catch (error: any) {
-      logger.error(``, error, { context: "NFE_EnviaEmail" });
-      throw new Error(`NFE_EnviaEmail: ${error.message}`);
     }
   }
 

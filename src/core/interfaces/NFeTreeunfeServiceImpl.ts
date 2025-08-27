@@ -9,7 +9,6 @@ import {
   DFePorUltimoNSU,
   DesconhecimentoDaOperacao,
   EPEC,
-  EmailParams,
   EventoNFe,
   GenericObject,
   InutilizacaoData,
@@ -66,5 +65,4 @@ export interface NFeTreeunfeServiceImpl {
     message: string;
     success: boolean;
   }>;
-  NFE_EnviaEmail(mailParams: EmailParams): void;
 }
