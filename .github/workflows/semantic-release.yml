@@ -25,10 +25,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@treeunfe'
+          node-version: "22"
+          cache: "npm"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@treeunfe"
 
       - name: Install dependencies
         run: npm ci
