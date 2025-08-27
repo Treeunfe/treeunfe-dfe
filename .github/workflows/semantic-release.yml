@@ -34,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: npm run build:prod
 
       - name: Test
         run: npm test
@@ -54,3 +54,10 @@ jobs:
           npx semantic-release --debug
 
           echo "Semantic release completed!"
+
+      - name: Clean up temporary files
+        run: |
+          echo "Cleaning up temporary files..."
+          rm -rf .release/
+          rm -f *.tgz
+          echo "Cleanup completed!"

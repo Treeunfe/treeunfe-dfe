@@ -15,7 +15,7 @@
       "@semantic-release/npm",
       {
         "npmPublish": true,
-        "tarballDir": "dist"
+        "tarballDir": ".release"
       }
     ],
     [
@@ -34,7 +34,13 @@
       "@semantic-release/github",
       {
         "successComment": "This issue has been resolved in version ${nextRelease.version} :tada:",
-        "failTitle": "The automated release is failing :rotating_light:"
+        "failTitle": "The automated release is failing :rotating_light:",
+        "assets": [
+          {
+            "path": ".release/*.tgz",
+            "label": "Release tarball"
+          }
+        ]
       }
     ]
   ],

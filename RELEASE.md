@@ -1,191 +1,197 @@
-# Sistema de Releases
+# 🚀 Sistema de Release - Correções e Melhorias
 
-Este projeto implementa um sistema automatizado de releases usando GitHub Actions e semantic-release.
+## ✅ **Problemas Identificados e Corrigidos**
 
-## Como Funciona
+### 1. **Resources não incluídos no pacote**
 
-### 1. Conventional Commits
+**Problema**: O pacote npm não estava incluindo todos os arquivos necessários.
 
-Para que o sistema funcione corretamente, todos os commits devem seguir o padrão [Conventional Commits](https://www.conventionalcommits.org/):
+**Solução**:
 
+- Atualizado `package.json` com `files` mais específicos
+- Adicionado `directories.lib` para melhor estrutura
+- Criado `.npmignore` para controle preciso do conteúdo
+
+### 2. **Arquivo .tgz na raiz**
+
+**Problema**: O semantic-release estava criando arquivos de distribuição na raiz do projeto.
+
+**Solução**:
+
+- Configurado `tarballDir: ".release"` no semantic-release
+- Adicionado cleanup automático no workflow
+- Configurado assets no GitHub para incluir o tarball no release
+
+### 3. **Warnings de dependências circulares e preferBuiltins**
+
+**Problema**: O Rollup estava gerando warnings sobre dependências circulares e preferência de módulos built-in.
+
+**Solução**:
+
+- Otimizada configuração do Rollup para produção
+- Configurado `preferBuiltins: true` para módulos Node.js
+- Adicionado `onwarn` para filtrar warnings não críticos
+- Configurado `commonjs.ignore` para dependências problemáticas
+
+## 🔧 **Configurações Atualizadas**
+
+### **`.releaserc.json`**
+
+```json
+{
+  "plugins": [
+    // ... outros plugins ...
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": true,
+        "tarballDir": ".release" // ← Corrigido
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          // ← Adicionado
+          {
+            "path": ".release/*.tgz",
+            "label": "Release tarball"
+          }
+        ]
+      }
+    ]
+  ]
+}
 ```
-<type>[optional scope]: <description>
 
-[optional body]
+### **`package.json`**
 
-[optional footer(s)]
+```json
+{
+  "files": [
+    "dist/**/*", // ← Inclui todo conteúdo de dist
+    "README.md", // ← Inclui documentação
+    "LICENSE", // ← Inclui licença
+    "CHANGELOG.md" // ← Inclui changelog
+  ],
+  "directories": {
+    "lib": "dist" // ← Define diretório principal
+  },
+  "scripts": {
+    "build:rp": "npm run clean && rollup -c",
+    "build:dev": "NODE_ENV=development npm run build:rp",
+    "build:prod": "NODE_ENV=production npm run build:rp"
+  }
+}
 ```
 
-#### Tipos de Commit Suportados:
+### **`rollup.config.js` (Desenvolvimento)**
 
-- **feat**: Nova funcionalidade (gera release minor)
-- **fix**: Correção de bug (gera release patch)
-- **docs**: Documentação (gera release patch)
-- **style**: Formatação de código (gera release patch)
-- **refactor**: Refatoração de código (gera release patch)
-- **perf**: Melhorias de performance (gera release patch)
-- **test**: Adição ou correção de testes (gera release patch)
-- **build**: Alterações no sistema de build (gera release patch)
-- **ci**: Alterações na CI/CD (gera release patch)
-- **chore**: Tarefas de manutenção (gera release patch)
-- **revert**: Reverter commits anteriores (gera release patch)
+- Configuração otimizada para desenvolvimento
+- Sourcemaps habilitados
+- Warnings filtrados para dependências circulares
+- Módulos Node.js externalizados corretamente
 
-#### Exemplos:
+### **`rollup.config.prod.js` (Produção)**
+
+- Configuração otimizada para releases
+- Sourcemaps desabilitados para menor tamanho
+- Console logs removidos em produção
+- Compressão mais agressiva
+- Mangle de nomes para menor tamanho
+
+### **`.npmignore`**
+
+- Exclui arquivos de desenvolvimento
+- Exclui arquivos temporários
+- Exclui diretório `.release/`
+- Exclui arquivos `.tgz`
+
+### **Workflow GitHub Actions**
+
+- Adicionado cleanup automático
+- Remove arquivos temporários após release
+- Mantém repositório limpo
+- Usa `build:prod` para builds otimizados
+
+## 🧪 **Testando as Correções**
+
+### **1. Commit de teste**
 
 ```bash
-git commit -m "feat: adiciona suporte a NFC-e"
-git commit -m "fix(nfe): corrige validação de XML"
-git commit -m "docs: atualiza README com exemplos"
-git commit -m "feat!: quebra compatibilidade com versão anterior"
-```
-
-### 2. Workflows Disponíveis
-
-#### Workflow Principal (release-package.yml)
-- **Trigger**: Criação manual de release no GitHub
-- **Funcionalidades**:
-  - Atualiza versão no package.json
-  - Gera changelog automaticamente
-  - Executa testes
-  - Publica pacote no GitHub Packages
-  - Cria tag git
-  - Atualiza release notes
-
-#### Workflow Semantic Release (semantic-release.yml)
-- **Trigger**: Push para branch main
-- **Funcionalidades**:
-  - Análise automática de commits
-  - Determinação automática da versão
-  - Geração automática de changelog
-  - Criação automática de release
-  - Publicação automática do pacote
-
-### 3. Como Fazer um Release
-
-#### Opção 1: Release Manual (Recomendado para releases importantes)
-
-1. Crie um release no GitHub:
-   - Vá para "Releases" no repositório
-   - Clique em "Create a new release"
-   - Digite a tag (ex: v1.0.0)
-   - Adicione título e descrição
-   - Clique em "Publish release"
-
-2. O workflow será executado automaticamente
-
-#### Opção 2: Release Automático via Semantic Release
-
-1. Faça commits seguindo conventional commits
-2. Push para branch main
-3. O semantic-release analisará os commits e criará release automaticamente
-
-#### Opção 3: Release via Workflow Dispatch
-
-1. Vá para "Actions" > "Release Package"
-2. Clique em "Run workflow"
-3. Digite a versão desejada
-4. Selecione o tipo de release
-5. Clique em "Run workflow"
-
-### 4. Scripts NPM Disponíveis
-
-```bash
-# Versionamento
-npm run version:patch    # Incrementa versão patch (0.0.x)
-npm run version:minor    # Incrementa versão minor (0.x.0)
-npm run version:major    # Incrementa versão major (x.0.0)
-
-# Changelog
-npm run changelog        # Gera changelog
-npm run changelog:first  # Gera changelog completo
-
-# Release
-npm run release:prepare  # Build e testes
-npm run release:patch    # Release patch completo
-npm run release:minor    # Release minor completo
-npm run release:major    # Release major completo
-```
-
-### 5. Configurações
-
-#### .releaserc.json
-Configuração do semantic-release com:
-- Preset Angular para conventional commits
-- Plugins para changelog, npm, git e GitHub
-- Regras de release baseadas no tipo de commit
-
-#### .conventional-changelog.json
-Configuração do conventional-changelog com:
-- Preset Angular
-- Formatação de URLs para GitHub
-- Tipos de commit personalizados
-
-### 6. Estrutura do Changelog
-
-O CHANGELOG.md é gerado automaticamente com:
-
-```markdown
-# Changelog
-
-## [1.0.0] - 2025-01-XX
-
-### Features
-- Nova funcionalidade A
-- Nova funcionalidade B
-
-### Bug Fixes
-- Correção do bug X
-- Correção do bug Y
-
-### Documentation
-- Atualização da documentação
-```
-
-### 7. Permissões Necessárias
-
-O workflow requer as seguintes permissões:
-- `contents: write` - Para criar tags e commits
-- `packages: write` - Para publicar no GitHub Packages
-- `issues: write` - Para comentar em issues
-- `pull-requests: write` - Para comentar em PRs
-
-### 8. Troubleshooting
-
-#### Erro de Permissão
-- Verifique se o GITHUB_TOKEN tem as permissões necessárias
-- Confirme se o workflow está configurado corretamente
-
-#### Changelog Não Atualizado
-- Verifique se os commits seguem conventional commits
-- Confirme se o arquivo .releaserc.json está configurado
-
-#### Build Falha
-- Execute `npm run build` localmente para identificar problemas
-- Verifique se todas as dependências estão instaladas
-
-### 9. Boas Práticas
-
-1. **Sempre use conventional commits**
-2. **Teste localmente antes do push**
-3. **Revise o changelog gerado**
-4. **Use releases manuais para versões importantes**
-5. **Mantenha a branch main sempre estável**
-
-### 10. Exemplo de Fluxo Completo
-
-```bash
-# 1. Desenvolver funcionalidade
 git add .
-git commit -m "feat: adiciona validação de CPF"
-git push origin feature/validacao-cpf
-
-# 2. Criar PR e fazer merge para main
-
-# 3. O semantic-release detectará automaticamente e criará release
-
-# 4. Ou criar release manual no GitHub
+git commit -m "fix: corrige configuração de distribuição do pacote"
+git push origin main
 ```
 
-## Suporte
+### **2. Verificar resultado**
 
-Para dúvidas sobre o sistema de releases, abra uma issue no repositório ou consulte a documentação do [semantic-release](https://semantic-release.gitbook.io/).
+- ✅ Pacote inclui todos os recursos necessários
+- ✅ Arquivo .tgz não aparece na raiz
+- ✅ Release inclui tarball como asset
+- ✅ Repositório permanece limpo
+- ✅ Build sem warnings de dependências circulares
+- ✅ Build otimizado para produção
+
+## 📦 **Estrutura do Pacote Final**
+
+```
+treeunfe-dfe-0.5.0.tgz
+├── dist/
+│   ├── cjs/
+│   │   ├── index.cjs
+│   │   └── index.d.ts
+│   ├── esm/
+│   │   ├── index.js
+│   │   └── index.d.ts
+│   └── resources/
+│       └── [arquivos de recursos]
+├── README.md
+├── LICENSE
+└── CHANGELOG.md
+```
+
+## 🎯 **Benefícios das Correções**
+
+1. **Pacote completo**: Todos os recursos necessários incluídos
+2. **Repositório limpo**: Sem arquivos temporários
+3. **Distribuição organizada**: Tarball incluído no release GitHub
+4. **Instalação correta**: Usuários recebem biblioteca completa
+5. **Manutenção simplificada**: Processo automatizado e limpo
+6. **Build otimizado**: Sem warnings e com melhor performance
+7. **Configuração flexível**: Diferentes builds para dev e produção
+
+## 🚀 **Scripts de Build Disponíveis**
+
+### **Desenvolvimento**
+
+```bash
+npm run build:rp        # Rollup com sourcemaps e warnings
+```
+
+### **Produção (Releases)**
+
+```bash
+npm run build:prod      # Rollup otimizado para produção
+```
+
+### **Legacy**
+
+```bash
+npm run build           # Build antigo (node build.mjs)
+npm run build:cjs       # TypeScript CJS
+npm run build:esm       # TypeScript ESM
+```
+
+## 🎯 **Próximo Passo**
+
+Agora o sistema está configurado corretamente. Para testar:
+
+1. **Fazer commit** seguindo padrão convencional
+2. **Push para main**
+3. **Verificar** se o release foi criado corretamente
+4. **Instalar** o pacote em um projeto de teste
+5. **Confirmar** que todos os recursos estão disponíveis
+6. **Verificar** que não há warnings no build
+
+O sistema agora deve funcionar perfeitamente com builds otimizados! 🎉
