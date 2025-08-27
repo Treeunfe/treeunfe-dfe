@@ -1,6 +1,6 @@
-# Guia de Contribuição - nfewizard-io
+# Guia de Contribuição - treeunfe-dfe
 
-Obrigado por considerar contribuir para a `nfewizard-io`! Este documento contém diretrizes completas para colaborar com o projeto. Siga estas instruções para facilitar o processo de colaboração.
+Obrigado por considerar contribuir para a `treeunfe-dfe`! Este documento contém diretrizes completas para colaborar com o projeto. Siga estas instruções para facilitar o processo de colaboração.
 
 ---
 
@@ -60,11 +60,11 @@ Antes de começar, certifique-se de ter as ferramentas necessárias:
 ```bash
 # 1. Faça fork do repositório no GitHub
 # 2. Clone seu fork localmente
-git clone https://github.com/SEU_USUARIO/nfewizard-io.git
-cd nfewizard-io
+git clone https://github.com/SEU_USUARIO/treeunfe-dfe.git
+cd treeunfe-dfe
 
 # 3. Adicione o repositório original como upstream
-git remote add upstream https://github.com/nfewizard-org/nfewizard-io.git
+git remote add upstream https://github.com/nfewizard-org/treeunfe-dfe.git
 
 # 4. Verifique os remotes
 git remote -v
@@ -75,11 +75,11 @@ Para SSH (se você tem chave SSH configurada):
 ```bash
 # 1. Faça fork do repositório no GitHub
 # 2. Clone seu fork localmente
-git clone git@github.com:SEU_USUARIO/nfewizard-io.git
-cd nfewizard-io
+git clone git@github.com:SEU_USUARIO/treeunfe-dfe.git
+cd treeunfe-dfe
 
 # 3. Adicione o repositório original como upstream
-git remote add upstream git@github.com:nfewizard-org/nfewizard-io.git
+git remote add upstream git@github.com:nfewizard-org/treeunfe-dfe.git
 
 # 4. Verifique os remotes
 git remote -v

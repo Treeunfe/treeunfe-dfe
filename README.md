@@ -74,23 +74,23 @@ build:
       - tedious
       - sqlite3
       - pg-query-stream
-      - nfewizard-io
+      - treeunfe-dfe
 ```
 
-Dessa forma, a nfewizard-io será tratada como uma dependência externa, permitindo sua execução sem a necessidade do JDK no ambiente.
+Dessa forma, a treeunfe-dfe será tratada como uma dependência externa, permitindo sua execução sem a necessidade do JDK no ambiente.
 
 ### Exemplo de importação CJS
 
 Para ambientes CJS (CommonJS) a importação utilizada deverá ser feita da seguinte maneira:
 
 ```typescript
-const NFeTreeunfe = require("nfewizard-io").default;
+const NFeTreeunfe = require("treeunfe-dfe").default;
 ```
 
 ## Exemplo de Utilização
 
 ```typescript
-import NFeTreeunfe from "nfewizard-io";
+import NFeTreeunfe from "treeunfe-dfe";
 // Instanciar
 const nfeTreeunfe = new NFeTreeunfe();
 
