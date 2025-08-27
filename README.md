@@ -87,6 +87,31 @@ Para ambientes CJS (CommonJS) a importação utilizada deverá ser feita da segu
 const TreeunfeDFe = require("treeunfe-dfe").default;
 ```
 
+## 🚀 Sistema de Releases
+
+Este projeto implementa um sistema automatizado de releases usando GitHub Actions e semantic-release. Para mais detalhes, consulte o arquivo [RELEASE.md](./RELEASE.md).
+
+### Como Contribuir
+
+1. **Use Conventional Commits**: Todos os commits devem seguir o padrão [Conventional Commits](https://www.conventionalcommits.org/)
+2. **Exemplo de commits válidos**:
+   ```bash
+   git commit -m "feat: adiciona suporte a NFC-e"
+   git commit -m "fix(nfe): corrige validação de XML"
+   git commit -m "docs: atualiza README com exemplos"
+   ```
+3. **Use o commitizen**: Execute `npm run commit` para commits interativos
+
+### Scripts Disponíveis
+
+```bash
+npm run commit          # Commit interativo com conventional commits
+npm run changelog       # Gera changelog automaticamente
+npm run release:patch   # Release patch (0.0.x)
+npm run release:minor   # Release minor (0.x.0)
+npm run release:major   # Release major (x.0.0)
+```
+
 ## Exemplo de Utilização
 
 ```typescript
