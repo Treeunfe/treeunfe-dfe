@@ -17,7 +17,7 @@
   },
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     "require": "./dist/cjs/index.cjs",
     "import": "./dist/esm/index.js"
@@ -31,10 +31,11 @@
     "build": "node build.mjs",
     "build:rp": "npm run clean && rollup -c",
     "build:dev": "NODE_ENV=development npm run build:rp",
-    "build:prod": "NODE_ENV=production npm run build:rp",
+    "build:prod": "NODE_ENV=production npm run build:rp && npm run build:types",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs-esm": "yarn build:cjs && yarn build:esm",
+    "build:types": "tsc -p tsconfig.json --emitDeclarationOnly",
     "version:patch": "npm version patch --no-git-tag-version",
     "version:minor": "npm version minor --no-git-tag-version",
     "version:major": "npm version major --no-git-tag-version",
