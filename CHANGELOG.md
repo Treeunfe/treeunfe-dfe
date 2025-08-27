@@ -1,3 +1,5 @@
+## [0.4.9](https://github.com/treeunfe/treeunfe-dfe/compare/v0.4.8...v0.4.9) (2025-08-27)
+
 # Changelog
 
 ## [0.4.7] - 2025-08-14
